@@ -8,7 +8,7 @@ const {
 } = require("../../middlewares");
 const { joiSchema } = require("../../models/user");
 const {
-  users: { signup, login, getCurrent, logout, updateAvatar },
+  users: { signup, login, getCurrent, logout, updateAvatar, verifyEmail },
 } = require("../../controllers");
 
 const router = express.Router();
@@ -23,5 +23,6 @@ router.patch(
   upload.single("avatar"),
   controllerWrapper(updateAvatar)
 );
+router.get("/verify/:verificationToken", controllerWrapper(verifyEmail));
 
 module.exports = router;

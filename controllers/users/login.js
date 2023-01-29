@@ -8,8 +8,10 @@ const login = async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (!user || !user.comparePassword(password)) {
-    return next(new HttpError(401, "Email or password is wrong"));
+  if (!user || !user.verify || !user.comparePassword(password)) {
+    return next(
+      new HttpError(401, "Email is wrong or not verify,  or password is wrong")
+    );
   }
 
   const payload = { id: user._id };
