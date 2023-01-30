@@ -13,4 +13,5 @@ module.exports = {
   logout,
   updateAvatar,
   verifyEmail,
+  verifyEmailController,
 };
