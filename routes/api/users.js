@@ -8,7 +8,15 @@ const {
 } = require("../../middlewares");
 const { joiSchema } = require("../../models/user");
 const {
-  users: { signup, login, getCurrent, logout, updateAvatar, verifyEmail },
+  users: {
+    signup,
+    login,
+    getCurrent,
+    logout,
+    updateAvatar,
+    verifyEmail,
+    verifyEmailController,
+  },
 } = require("../../controllers");
 
 const router = express.Router();
@@ -22,6 +30,11 @@ router.patch(
   auth,
   upload.single("avatar"),
   controllerWrapper(updateAvatar)
+);
+usersRouter.post(
+  "/verify",
+  emailValidation,
+  controllerWrapper(verifyEmailController)
 );
 router.get("/verify/:verificationToken", controllerWrapper(verifyEmail));
 
